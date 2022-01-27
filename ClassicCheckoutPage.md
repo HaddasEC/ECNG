@@ -42,7 +42,7 @@ https://checkout.e-c.co.il/?Description=Goods%20and%20services%20from%20Test%20W
 ## Configuration in EasyCard Merchant's Portal
 
 On EasyCard Merchant's portal [https://merchant.e-c.co.il](https://merchant.e-c.co.il) there are few settings related to Checkout Page. To open the settings page you need to press on your user name link:
-![Open settings](images/OpenSettings.png)
+![Open settings](images/OpenSettings.PNG)
 
 <br/>
 
@@ -52,7 +52,7 @@ On EasyCard Merchant's portal [https://merchant.e-c.co.il](https://merchant.e-c.
 
 Then you need to find **Checkout Redirect URLs** section:
 
-![Checkout Redirect URLs](images/CheckoutRedirectURLs.png)
+![Checkout Redirect URLs](images/CheckoutRedirectURLs.PNG)
 
 Please add base address of your website here. You can use several base addresses. ``RedirectUrl`` in query string described above should belongs to one of the configured base urls.
 
@@ -64,7 +64,7 @@ Please add base address of your website here. You can use several base addresses
 
 You can specify custom logo image and custom css file. Please use **Checkout** section and **Payment Request** section:
 
-![Custom logo and css](images/CustomLogoAndCss.png)
+![Custom logo and css](images/CustomLogoAndCss.PNG)
 
 <br/>
 
@@ -73,7 +73,7 @@ You can specify custom logo image and custom css file. Please use **Checkout** s
 
 In **Checkout Redirect URLs** section there is a flag **Extended response for checkout transaction** enables additional query string parameters which will be added to ``RedirectUrl`` by EasyCard. In this mode NextGen EasyCard will mimic EasyCard classic behavior.
 
-![Legacy redirect response](images/LegacyRedirectResponse.png)
+![Legacy redirect response](images/LegacyRedirectResponse.PNG)
 
 > You can use **Test Web Store** to check all parameters which will be present in this mode.
 
@@ -85,6 +85,6 @@ In case if **Extended response for checkout transaction** is disabled, only Easy
 ## Shared API Key
 
 You can get ``ApiKey`` for simple Checkout Page using **Show Shared Key** button in  **Checkout** section or generate ne key using **Reset Shared Key** button:
-![Shared Api Key](images/SharedApiKey.png)
+![Shared Api Key](images/SharedApiKey.PNG)
 
 <br/><br/>
