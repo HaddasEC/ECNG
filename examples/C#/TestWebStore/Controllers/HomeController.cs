@@ -44,7 +44,7 @@ namespace TestWebStore.Controllers
         {
             var transactionEntity = await transactionsApiClient.GetTransaction(model.TransactionID);
 
-            model.Payload = JsonConvert.SerializeObject(transactionEntity);
+            model.Payload = JsonConvert.SerializeObject(transactionEntity, Formatting.Indented);
 
             return View(model);
         }
@@ -109,9 +109,15 @@ namespace TestWebStore.Controllers
                 easyCardQuery.NetTotal = 0;
             }
 
-            var paymentIntent = await transactionsApiClient.CreatePaymentIntent(easyCardQuery);
+            var paymentIntentRes = await transactionsApiClient.CreatePaymentIntent(easyCardQuery);
 
-            return Redirect(paymentIntent.AdditionalData["url"].ToString());
+            if (paymentIntentRes.Status != Shared.Api.Models.Enums.StatusEnum.Success)
+            {
+                ViewBag.Error = paymentIntentRes.Message;
+                return View("Index", model);
+            }
+
+            return Redirect(paymentIntentRes.AdditionalData["url"].ToString());
         }
 
         private string BuildRedirectUrlForLegacyFlow(BasketViewModel model)

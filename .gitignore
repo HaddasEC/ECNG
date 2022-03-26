@@ -361,3 +361,4 @@ MigrationBackup/
 
 **/.sonarqube
 **/.sonarlint
+examples/C\#/TestWebStore/appsettings.Development.json
