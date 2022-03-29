@@ -3,6 +3,29 @@ EasyCard Next Generation API v1 - _Checkout Page (Redirect Page)_
 
 <pre> The simple way to collect payments hosted by EasyCard. </pre>
 
+Sections
+-------------------------------
+- [Environments](Readme.md#environments)
+
+- [Examples](Readme.md#examples)
+
+- [API reference (used within Checkout Page)](TransactionsApi.md)
+
+- [Checkout Page - common information](#checkout-page---common-information)
+
+- [Configuration in EasyCard Merchant's Portal](#configuration-in-easycard-merchants-portal)
+
+- [Classic Checkout Page](ClassicCheckoutPage.md) 
+
+- [Advanced Checkout Page](#advanced-checkout-page)
+
+- [Checkout Page - Create Consumer flow](#checkout-page---create-consumer-flow)
+
+- [Metadata API](MetadataApi.md)
+
+
+<br/>
+
 The purchase process on an e-commerce site includes three steps: searching for products to buy, filling in delivery details and making a purchase on a payment page. 
 The most sensitive in the process is the payment page.
 
@@ -14,11 +37,32 @@ Makes it easier for the site to get approval from the credit card companies and 
 
 EasyCard’s Redirect debit page is included in the company’s PCI certification, PCI DSS Level 1 and is secured according to the strongest standards of credit card companies and ensures secure execution of credit charges. 
 
-# Environments
+<br/><br/>
+
+Environments
+-------------------------------
 
 Please see [Base API information](Readme.md#environments)
 
-# Checkout Page - common information
+<br/><br/>
+
+API reference (used within Checkout Page)
+-------------------------------
+
+Please see [Transactions API](TransactionsApi.md)
+
+<br/><br/>
+
+Examples
+-----------------------------------------------------------------
+
+Please see [Examples](Readme.md#examples)
+
+<br/><br/>
+
+
+Checkout Page - common information
+-------------------------------
 
 There are two options to generate Checkout Page:
  - classic style with query string which contains all deal parameters (which can be used first of all to support legacy systems)
@@ -38,7 +82,8 @@ There are two options to generate Checkout Page:
 
 - - -
 
-## Configuration in EasyCard Merchant's Portal
+Configuration in EasyCard Merchant's Portal
+-------------------------------------------
 
 On EasyCard Merchant's portal [https://merchant.e-c.co.il](https://merchant.e-c.co.il) there are few settings related to Checkout Page. To open the settings page you need to press on your user name link:
 ![Open settings](images/OpenSettings.PNG)
@@ -67,11 +112,15 @@ You can specify custom logo image and custom css file. Please use **Checkout** s
 
 <br/>
 
-# Classic Checkout Page
+Classic Checkout Page
+-------------------------------------------
 
-Please refer to: [ClassicCheckoutPage](ClassicCheckoutPage.md) 
+Please refer to: [Classic Checkout Page](ClassicCheckoutPage.md) 
 
-# Advanced Checkout Page
+<br/><br/>
+
+Advanced Checkout Page
+-------------------------------------------
 
 EasyCard Next Generation also provides more secured and solid way to collect Checkout transactions using Payment Intent API:
 
@@ -93,3 +142,9 @@ Please find out API description in section below.
 
 <br/><br/>
 
+Checkout Page - Create Consumer flow
+-------------------------------------------
+
+There is additional option to enhance integration of EasyCard and merchant's system. EasyCard provides ability for merchant to store miscelaneous metadata related to deals - first of all `Consumers` reference. You can create Consumer record via [Metadata API](MetadataApi.md) and then use ConsumerID when creating `PaymentIntent`.
+
+![Checkout Sequence Diagram - Create Consumer flow](images/CheckoutSequenceWithConsumerDiagram.svg) 

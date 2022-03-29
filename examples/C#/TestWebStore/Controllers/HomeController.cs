@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EasyCardNG.TransactionsApiClient;
+using MerchantProfileApi.Models.Billing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -60,6 +61,56 @@ namespace TestWebStore.Controllers
         [HttpPost]
         public async Task<IActionResult> PayWithEasyCard(BasketViewModel model)
         {
+            if (model.ConsumerID == null && !string.IsNullOrWhiteSpace(model.ConsumerExternalReference))
+            {
+                // Create new customer in ECNG system or get existin
+
+                var exisingConsumers = await transactionsApiClient.GetConsumers(new ConsumersFilter 
+                {
+                    ExternalReference = model.ConsumerExternalReference,
+                    //WoocommerceID = model.WoocommerceID, // TODO: use appropriate filters
+                    //NationalID = model.NationalID
+                });
+
+                if (exisingConsumers.NumberOfRecords == 1)
+                {
+                    model.ConsumerID = exisingConsumers.Data.First().ConsumerID;
+                }
+                else if (exisingConsumers.NumberOfRecords > 1)
+                {
+                    throw new ApplicationException("There are several consumers with same ExternalReference in ECNG");
+                }
+
+                if (model.ConsumerID == null)
+                {
+                    var consumerRequest = new ConsumerRequest
+                    {
+                        ConsumerEmail = model.Email,
+                        ConsumerName = model.Name,
+                        ConsumerNationalID = model.NationalID,
+                        ConsumerPhone = model.Phone,
+                        ExternalReference = model.ConsumerExternalReference,
+                    };
+
+                    //if (address != null)
+                    //{
+                    //    consumerRequest.ConsumerAddress = new Address
+                    //    {
+                    //        CountryCode = address.CountryCode,
+                    //        City = address.City,
+                    //        Zip = address.ZipCode,
+                    //        Street = address.Street,
+                    //        House = address.HouseNumber,
+                    //        Apartment = address.AppartmentNumber
+                    //    };
+                    //}
+
+                    var consumerResponse = await transactionsApiClient.CreateConsumer(consumerRequest);
+
+                    model.ConsumerID = consumerResponse.EntityUID;
+                }
+            }
+
             var webStoreUrl = appSettings.RedirectUrlBase;
 
             PaymentRequestCreate easyCardQuery = new PaymentRequestCreate();
