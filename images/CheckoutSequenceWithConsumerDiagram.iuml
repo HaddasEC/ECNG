@@ -9,7 +9,7 @@ consumer->website: start payment
 website->api: "Find existing <b>consumers</b> (by NationalID, ExternalReference, Email etc.)"
 api-->website: Existing consumers list
 website->api: "Create new <b>Consumer</b> record if consumer does not exist in EasyCard"
-api-->website: "New <b>Consumer</b> recor ID"
+api-->website: "New <b>Consumer</b> record ID"
 website->api: "create <b>Payment Intent</b> - use ConsumerID in request"
 api-->website: "<b>Payment Intent</b> url"
 website->checkout : "open using <b>Payment Intent</b> url"
